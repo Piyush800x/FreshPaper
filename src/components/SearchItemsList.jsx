@@ -7,23 +7,64 @@ const SearchItemsList = () => {
     const location = useLocation();
     const { searchTerm } = location.state || {};
     const [links, setLinks] = useState([]);
+    const [page, setPage] = useState(1)     // by changing the state it auto-reloads #YAY
+    const [prevLocation, setPrevLocation] = useState(location.state || {});
+    const [isLoading, setIsLoading] = useState(false); // Add a state for loading
+
     useEffect(() => {
+        if (prevLocation !== searchTerm)    {       // Prefetly working
+            setPrevLocation(searchTerm)
+            setPage(1)
+        }
+        console.log(`------------------------`)
+        console.log(`prev ${prevLocation}`)
+        console.log(`now ${searchTerm}`)
         get_links()
-    }, [location])
+    }, [location, page])
 
     let get_links = async () =>  {
-        let data = await invoke('searching', {name: searchTerm});
+        setIsLoading(true);
+        let data = await invoke('searching', {name: searchTerm, page: page});       // just test
         setLinks(data);
         console.log("SearchItemList CALL");
         console.log(links);
+        console.log(`Page is ${page}`)
+        setIsLoading(false);
+    }
+
+    const handlePrev = async () => {
+        if (page === 1) {
+            setPage(1)    
+        }
+        else {
+            setPage(page-1)
+        }
+        console.log(`handlePrev called page ${page}`)
+    }
+
+    const handleNext = async () => {
+        setPage(page+1)
+        console.log(`handleNext called page ${page}`)
     }
 
   return (
-    <div>
+    <div className='flex flex-col'>
         <div className='flex flex-wrap justify-center overflow-x-auto z-0'>
             {links.map((link, index) => (
-                <ImageCard key={index} src={link}/>
+                <ImageCard key={index} src={link} />
             ))}
+        </div>
+        <div class="flex flex-row justify-center items-center py-10">
+            <div className='px-4 py-5 shadow-xl'>
+                <button onClick={handlePrev} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    ←
+                </button>
+            </div>
+            <div className='px-4 py-5 '>
+                <button onClick={handleNext} className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    →
+                </button>
+            </div>
         </div>
     </div>
   )

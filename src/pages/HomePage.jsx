@@ -6,19 +6,18 @@ import SearchBar from '../components/SearchBar.jsx';
 
 const HomePage = () => {
   return (
-    <div className='block' style={{backgroundImage: `url(${app_bg})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', minHeight: '100vh',}}>
+    <div className='block' >
       <div className='z-10'>
         <SetSidebar/>
       </div>
-      <div className="flex container mx-auto p-4 justify-center">
+      <div className="flex container mx-auto p-4 justify-center items-center">
         <SearchBar />
       </div>
 
-      <div className='flex flex-wrap justify-center overflow-x-auto z-0'>
-          <ImageCard/>
-          <ImageCard/>
-          <ImageCard/>
-          <ImageCard/>
+      <div className='flex flex-wrap text-center justify-center overflow-x-auto z-0'>
+        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            Wallpaper App using Rust and React
+        </h1>
       </div>
     </div>
   )

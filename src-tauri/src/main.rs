@@ -18,7 +18,7 @@ async fn main() {
 }
 
 #[command]
-async fn searching(name: String) -> Vec<String> {
-    let mut list = get_from_search(name).await;
+async fn searching(name: String, page: i32) -> Vec<String> {
+    let mut list = get_from_search(name, page).await;
     return list;
 }
