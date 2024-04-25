@@ -7,10 +7,10 @@ import app_bg from '../assets/app_bg.webp';
 
 const SearchPage = () => {
   return (
-    <div style={{backgroundColor: '#00000'}}>
-      <div className='z-10'>
+    <div className='block' style={{backgroundColor: '#00000'}}>
+      {/* <div className='z-10'>
             <SetSidebar/>
-        </div>
+        </div> */}
         <div className="flex flex-row container mx-auto p-4 justify-center items-center">
             <SearchBar />
             <CogOutline/>

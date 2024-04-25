@@ -54,13 +54,13 @@ const SearchItemsList = () => {
                 <ImageCard key={index} src={link} />
             ))}
         </div>
-        <div class="flex flex-row justify-center items-center py-10">
-            <div className='px-4 py-5 shadow-xl'>
+        <div class="flex flex-row justify-center items-center py-10 gap-4">
+            <div className='px-2 py-2 shadow-xl rounded-lg'>
                 <button onClick={handlePrev} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     ←
                 </button>
             </div>
-            <div className='px-4 py-5 '>
+            <div className='px-2 py-2 shadow-xl rounded-lg'>
                 <button onClick={handleNext} className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     →
                 </button>

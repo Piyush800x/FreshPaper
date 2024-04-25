@@ -5,10 +5,11 @@ use rand::prelude::*;
 use reqwest;
 use serde::{Deserialize, Serialize};
 use std;
-use std::env;
+use std::fs::File;
+use std::io::{copy, Read};
 use std::string::String;
 use tokio;
-use tauri::command;
+use rand::Rng;
 
 
 #[derive(Debug, Deserialize)]
@@ -75,3 +76,28 @@ pub async fn get_from_search(name: String, page: i32) -> Vec<String>  {    // ca
 // pub fn print_username(name: &str) {
 //     println!("Username: {}", name);
 // }
+pub async fn download_image(url: String) -> bool   {
+    // Send a GET request to the URL
+    let response = reqwest::get(url.to_string()).await.unwrap();
+    print!("Response -> {:?}", response);
+
+    // Check if the request was successful
+    return if response.status().is_success() {
+        // Extract the image data
+        let image_data = response.bytes().await.unwrap();
+
+        // Create a new file to save the image
+        let random_number = rand::thread_rng().gen_range(1000..999999);
+        let file_name = format!("{}.jpg", random_number);
+        let mut file = File::create(file_name).unwrap();
+
+        // Write the image data to the file
+        copy(&mut image_data.as_ref(), &mut file).unwrap();
+
+        println!("Image downloaded successfully!");
+        true
+    } else {
+        println!("Failed to download image: {}", response.status());
+        false
+    }
+}
