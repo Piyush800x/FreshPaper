@@ -27,28 +27,28 @@ const ImageCard = ({ src }) => {
   };
 
   return (
-    <div className='font-ubuntu backdrop-filter p-2'>
+    <div className='font-opensans backdrop-filter p-2'>
         <div className='bg-opacity-80 backdrop-blur-lg'>
-            <div className='bg-white bg-opacity-20 rounded-lg p-8'>
+            <div className='bg-blue-500 bg-opacity-20 rounded-2xl p-8'>
                 <div className="object-contain max-h-md max-w-md flex flex-col items-center p-2">
                   <img
                       src={src}
                       alt="lol"
-                      className={`max-w-full  h-auto mb-4 transition-opacity duration-500 ${
+                      className={`rounded-xl max-w-full  h-auto mb-4 transition-opacity duration-500 ${
                       isVisible ? 'opacity-100' : 'opacity-0'
                       }`}
                       style={{ opacity: isVisible ? 1 : 0}}
                   />
                   <button onClick={() => downloadImage(src)} 
-                  className="transition ease-in-out delay-50 bg-blue-500 hover:bg-blue-700 hover:-translate-y-1 hover:scale-110 text-white font-bold py-2 px-4 rounded">Download
+                  className="text-lg font-light transition ease-in-out delay-50 bg-blue-500 hover:bg-blue-700 hover:drop-shadow-lg hover:shadow-blue-500/50 hover:-translate-y-1 hover:scale-110 text-white py-2 px-4 rounded-3xl w-36 h-12">Download
                   </button>
                   {isDownloaded && (
                     <div className="fixed inset-0 flex items-center justify-center z-50">
-                      <div className=" bg-white rounded-lg shadow-lg p-6 justify-center items-center">
+                      <div className="flex flex-col bg-purple-50 rounded-2xl shadow-lg p-6 justify-center items-center">
                         <p className="text-lg font-bold mb-4">Download Complete!</p>
                         <button
                           onClick={() => setIsDownloaded(false)}
-                          className="transition ease-in-out delay-50 bg-purple-500 hover:bg-purple-700 hover:-translate-y-1 hover:scale-110 text-white font-bold py-2 px-4 rounded justify-center items-center"
+                          className="text-lg transition ease-in-out delay-50 bg-blue-500 hover:bg-blue-700 hover:drop-shadow-lg hover:shadow-blue-500/50 hover:-translate-y-1 hover:scale-110 text-white font-light py-2 px-4 rounded-3xl justify-center items-center w-24 h-12"
                         >
                           Close
                         </button>

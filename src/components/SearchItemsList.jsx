@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import {invoke} from '@tauri-apps/api/tauri';
 import ImageCard from './ImageCard';
+import arrowBack from '../assets/arrow_back.svg'
+import arrowForward from '../assets/arrow_forward.svg'
 
 const SearchItemsList = () => {
     const location = useLocation();
@@ -55,14 +57,14 @@ const SearchItemsList = () => {
             ))}
         </div>
         <div class="flex flex-row justify-center items-center py-10 gap-4">
-            <div className='px-2 py-2 shadow-xl rounded-lg'>
-                <button onClick={handlePrev} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    ←
+            <div className='px-2 py-2 drop-shadow-xl rounded-xl'>
+                <button onClick={handlePrev} className="rounded-xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
+                    <img src={arrowBack} style={{width:20, height:20}} alt='Arrowback'></img>
                 </button>
             </div>
-            <div className='px-2 py-2 shadow-xl rounded-lg'>
-                <button onClick={handleNext} className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    →
+            <div className='px-2 py-2 drop-shadow-xl rounded-xl'>
+                <button onClick={handleNext} className="rounded-xl bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4">
+                <img src={arrowForward} style={{width:20, height:20}} alt='Arrowback'></img>
                 </button>
             </div>
         </div>

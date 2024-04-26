@@ -10,6 +10,8 @@ use std::io::{copy, Read};
 use std::string::String;
 use tokio;
 use rand::Rng;
+use std::path::PathBuf;
+use std::env;
 
 
 #[derive(Debug, Deserialize)]
@@ -27,15 +29,15 @@ pub struct UnsplashSearchResult {
     pub results: Vec<UnsplashPhoto>,
 }
 
-pub async fn download(img_url: String) {
-    let mut rng = rand::thread_rng();
-    let img_response = reqwest::get(&img_url).await.unwrap();
-    let img_bytes = img_response.bytes().await.unwrap();
-
-    // Write image
-    std::fs::write(format!("{}.jpg", rng.gen_range(0..=9999)), img_bytes).unwrap();
-    print!("Download success!");
-}
+// pub async fn download(img_url: String) {
+//     let mut rng = rand::thread_rng();
+//     let img_response = reqwest::get(&img_url).await.unwrap();
+//     let img_bytes = img_response.bytes().await.unwrap();
+//
+//     // Write image
+//     std::fs::write(format!("{}.jpg", rng.gen_range(0..=9999)), img_bytes).unwrap();
+//     print!("Download success!");
+// }
 
 pub async fn search(access_key: String, query: String, page: i32) -> UnsplashSearchResult {
     let query = query;
@@ -86,10 +88,28 @@ pub async fn download_image(url: String) -> bool   {
         // Extract the image data
         let image_data = response.bytes().await.unwrap();
 
+        // Determine the downloads folder based on the operating system
+        let mut downloads_folder = match env::var_os("HOME") {
+            Some(home_dir) => {
+                let mut path = PathBuf::from(home_dir);
+                path.push("Downloads");
+                path
+            }
+            None => {
+                // Default to the current directory if HOME environment variable is not set
+                PathBuf::from(".")
+            }
+        };
+        println!("{:?}", downloads_folder);
+
         // Create a new file to save the image
         let random_number = rand::thread_rng().gen_range(1000..999999);
         let file_name = format!("{}.jpg", random_number);
-        let mut file = File::create(file_name).unwrap();
+
+        // Append the filename to the downloads folder path
+        downloads_folder.push(&file_name);
+
+        let mut file = File::create(downloads_folder).unwrap();
 
         // Write the image data to the file
         copy(&mut image_data.as_ref(), &mut file).unwrap();

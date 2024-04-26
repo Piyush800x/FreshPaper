@@ -7,7 +7,7 @@ import HomeHero from '../components/HomeHero.jsx'
 
 const HomePage = () => {
   return (
-    <div className='block' >
+    <div className='block bg-blue-50' >
       {/* <div className='z-10'>
         <SetSidebar/>
       </div> */}

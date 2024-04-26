@@ -14,3 +14,7 @@
     font-family: "IBM";
     src: url("../fonts/IBM/IBMPlexSans-Medium");
 }
+@font-face {
+    font-family: "Opensans";
+    src: url("../fonts/OpenSans/OpenSans-VariableFont_wdth,wght");
+}

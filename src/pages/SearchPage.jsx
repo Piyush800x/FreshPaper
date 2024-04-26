@@ -7,7 +7,7 @@ import app_bg from '../assets/app_bg.webp';
 
 const SearchPage = () => {
   return (
-    <div className='block' style={{backgroundColor: '#00000'}}>
+    <div className='block' style={{backgroundColor: '#e3f2fd'}}>
       {/* <div className='z-10'>
             <SetSidebar/>
         </div> */}
