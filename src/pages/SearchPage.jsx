@@ -13,7 +13,7 @@ const SearchPage = () => {
         </div> */}
         <div className="flex flex-row container mx-auto p-4 justify-center items-center">
             <SearchBar />
-            <CogOutline/>
+            
         </div>
         <SearchItemsList Redirect='/data'/>
     </div>

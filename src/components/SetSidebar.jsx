@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Sidebar2 from './Sidebar2.jsx';
 import { CogOutline } from 'react-ionicons'
+import HamburgerMenu from '../assets/hamburger_menu.svg'
+import NewHamburgerMenu from '../assets/new_hamburger_menu.svg'
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,10 +29,10 @@ const Sidebar = () => {
 
       <div className="fixed top-4 left-4 z-50">
         <button
-          className="p-2 text-white rounded-md focus:outline-none"
+          className="p-2 bg-blue-200 text-white rounded-md focus:outline-none"
           onClick={toggleSidebar}
         >
-        <CogOutline />
+          <img src={NewHamburgerMenu} style={{width:35, height:35}} alt='Search'></img>
         </button>
       </div>
     </div>

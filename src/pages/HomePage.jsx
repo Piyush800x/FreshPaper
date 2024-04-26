@@ -8,9 +8,9 @@ import HomeHero from '../components/HomeHero.jsx'
 const HomePage = () => {
   return (
     <div className='block bg-blue-50' >
-      {/* <div className='z-10'>
+      <div className='z-10'>
         <SetSidebar/>
-      </div> */}
+      </div>
       <div className="flex container mx-auto p-4 justify-center items-center">
         <SearchBar />
       </div>

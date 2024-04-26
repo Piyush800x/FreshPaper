@@ -4,7 +4,7 @@ import logo from '../assets/big_logo.png'
 const Sidebar2 = () => {
   return (
     <div>
-        <div className="fixed top-0 left-0 h-screen w-64 bg-gray-800 text-white">
+        <div className="fixed top-0 left-0 h-screen w-20 bg-gray-800 text-white">
             <div className='flex justify-center bg-lime-100'>
                 <img src={logo} style={{width: 64}}/>
             </div>

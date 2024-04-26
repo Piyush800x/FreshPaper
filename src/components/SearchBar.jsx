@@ -32,29 +32,27 @@ function SearchBar() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={handleSearchChange}
-        className={`px-3 py-2 border border-gray-300 rounded-md transition-all duration-300 ease-in-out ${
-          isHovered ? 'w-56' : 'w-20'
-        }`}
-      />
-      <button
-        onClick={handleSearch}
-        className="ml-2 text-white px-4 py-2 rounded-md hover: transition-all duration-300 ease-in-out"
-      >
-        <span className="text-lg"><img src={SearchIcon} style={{width:50, height:50}} alt='Search'></img></span>
-      </button>
+      <div className='bg-blue-200 px-1 py-1 rounded-xl'>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className={`px-3 py-2 bg-blue-100 border border-gray-300 rounded-xl transition-all duration-300 ease-in-out ${
+            isHovered ? 'w-56' : 'w-20'
+          }`}
+        />
+      </div>
+      <div className='ml-2 bg-blue-200 rounded-xl justify-center items-center'>
+        <button
+          onClick={handleSearch}
+          className=" text-white px-2 py-2 rounded-md hover: transition-all duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-blue-500"
+        >
+          <span className="text-lg"><img src={SearchIcon} style={{width:35, height:35}} alt='Search'></img></span>
+        </button>
+      </div>
     </div>
   );
 }
-
-// Dummy search function for illustration
-const performSearch = (searchTerm) => {
-  console.log('Performing search for:', searchTerm);
-  // Your search logic goes here
-};
 
 export default SearchBar;
