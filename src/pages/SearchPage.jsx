@@ -8,11 +8,11 @@ import app_bg from '../assets/app_bg.webp';
 const SearchPage = () => {
   return (
     <div className='block' style={{backgroundColor: '#e3f2fd'}}>
-      {/* <div className='z-10'>
-            <SetSidebar/>
-        </div> */}
+      <div className='z-10'>
+            <SetSidebar theme={'blue'}/>
+        </div>
         <div className="flex flex-row container mx-auto p-4 justify-center items-center">
-            <SearchBar />
+            <SearchBar theme={'blue'} />
             
         </div>
         <SearchItemsList Redirect='/data'/>

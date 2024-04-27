@@ -3,7 +3,7 @@ import SearchIcon from '../assets/search.svg';
 import {invoke} from '@tauri-apps/api/tauri';
 import { useHistory } from 'react-router-dom';
 
-function SearchBar() {
+function SearchBar({theme}) {
   const [searchTerm, setSearchTerm] = useState('');
   const [isHovered, setIsHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,25 +28,25 @@ function SearchBar() {
 
   return (
     <div
-      className="flex items-center relative"
+      className="flex items-center relative font-opensans"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className='bg-blue-200 px-1 py-1 rounded-xl'>
+      <div className={`bg-${theme}-200 px-1 py-1 rounded-xl`}>
         <input
           type="text"
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
-          className={`px-3 py-2 bg-blue-100 border border-gray-300 rounded-xl transition-all duration-300 ease-in-out ${
+          className={`px-3 py-2 bg-${theme}-100 border border-gray-300 rounded-xl transition-all duration-300 ease-in-out ${
             isHovered ? 'w-56' : 'w-20'
           }`}
         />
       </div>
-      <div className='ml-2 bg-blue-200 rounded-xl justify-center items-center'>
+      <div className={`ml-2 bg-${theme}-200 rounded-xl justify-center items-center`}>
         <button
           onClick={handleSearch}
-          className=" text-white px-2 py-2 rounded-xl hover: transition-all duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-blue-500"
+          className={`text-white px-2 py-2 rounded-xl hover: transition-all duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-${theme}-500`}
         >
           <span className="text-lg"><img src={SearchIcon} style={{width:35, height:35}} alt='Search'></img></span>
         </button>

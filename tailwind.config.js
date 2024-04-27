@@ -18,7 +18,12 @@ export default {
     //   'blue-700': '#1976d2',
     //   'blue-900': '#0d47a1'
     // },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'home_bg': "url('src/assets/home_bg.jpg')",
+        
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

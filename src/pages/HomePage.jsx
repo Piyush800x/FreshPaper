@@ -7,12 +7,12 @@ import HomeHero from '../components/HomeHero.jsx'
 
 const HomePage = () => {
   return (
-    <div className='block bg-blue-50' >
+    <div className='block bg-pink-50 w-full' >
       <div className='z-10'>
-        <SetSidebar/>
+        <SetSidebar theme={'purple'}/>
       </div>
       <div className="flex container mx-auto p-4 justify-center items-center">
-        <SearchBar />
+        <SearchBar theme={'purple'} />
       </div>
 
       <div className='flex text-center justify-center overflow-x-auto z-0'>

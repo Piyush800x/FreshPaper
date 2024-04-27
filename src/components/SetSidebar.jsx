@@ -4,7 +4,7 @@ import { CogOutline } from 'react-ionicons'
 import HamburgerMenu from '../assets/hamburger_menu.svg'
 import NewHamburgerMenu from '../assets/new_hamburger_menu.svg'
 
-const Sidebar = () => {
+const Sidebar = ({theme}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -24,12 +24,12 @@ const Sidebar = () => {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <Sidebar2/>
+        <Sidebar2 theme={theme}/>
       </div>
 
       <div className="fixed top-4 left-4 z-50">
         <button
-          className="p-2 bg-blue-200 text-white rounded-md focus:outline-none"
+          className={`p-2 bg-${theme}-200 text-white rounded-md focus:outline-none`}
           onClick={toggleSidebar}
         >
           <img src={NewHamburgerMenu} style={{width:35, height:35}} alt='Search'></img>
