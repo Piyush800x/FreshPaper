@@ -46,7 +46,7 @@ function SearchBar() {
       <div className='ml-2 bg-blue-200 rounded-xl justify-center items-center'>
         <button
           onClick={handleSearch}
-          className=" text-white px-2 py-2 rounded-md hover: transition-all duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-blue-500"
+          className=" text-white px-2 py-2 rounded-xl hover: transition-all duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-blue-500"
         >
           <span className="text-lg"><img src={SearchIcon} style={{width:35, height:35}} alt='Search'></img></span>
         </button>
