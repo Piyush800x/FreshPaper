@@ -38,7 +38,7 @@ function SearchBar({theme}) {
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
-          className={`px-3 py-2 bg-${theme}-100 border border-gray-300 rounded-xl transition-all duration-300 ease-in-out ${
+          className={`px-3 py-2 border border-gray-300 rounded-xl transition-all duration-300 ease-in-out ${
             isHovered ? 'w-56' : 'w-20'
           }`}
         />

@@ -6,8 +6,8 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "wallpaper_app_latest",
-    "version": "0.0.2"
+    "productName": "FreshPaper",
+    "version": "0.0.3"
   },
   "tauri": {
     "allowlist": {

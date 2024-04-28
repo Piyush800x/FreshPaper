@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Sidebar2 from './Sidebar2.jsx';
-import { CogOutline } from 'react-ionicons'
-import HamburgerMenu from '../assets/hamburger_menu.svg'
-import NewHamburgerMenu from '../assets/new_hamburger_menu.svg'
+import HomeIcon from '../assets/home_icon.svg'
 
 const Sidebar = ({theme}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,20 +18,21 @@ const Sidebar = ({theme}) => {
         onClick={toggleSidebar}
       ></div>
       <div
-        className={`fixed top-0 left-0 h-screen w-64  text-white transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-screen w-20  text-white transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <Sidebar2 theme={theme}/>
       </div>
 
-      <div className="fixed top-4 left-4 z-50">
-        <button
-          className={`p-2 bg-${theme}-200 text-white rounded-md focus:outline-none`}
-          onClick={toggleSidebar}
-        >
-          <img src={NewHamburgerMenu} style={{width:35, height:35}} alt='Search'></img>
-        </button>
+      <div className="transition-all ease-in-out delay-50 fixed top-4 left-4 z-50 hover:translate-y-1 hover:scale-110">
+        <a href='/'>
+          <button
+            className={`p-2 bg-${theme}-200 text-white rounded-xl focus:outline-none`}
+          >
+            <img className='p-1' src={HomeIcon} style={{width:35, height:35}} alt='Search'></img>
+          </button>
+        </a>
       </div>
     </div>
   );

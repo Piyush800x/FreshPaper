@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import {invoke} from '@tauri-apps/api/tauri';
-import axios from 'axios';
-import HomeBg from '../assets/home_bg.jpg'
 
 const HomeHero = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -50,8 +48,9 @@ const HomeHero = () => {
     
   return (
     <div className='flex flex-col justify-center items-center'>
-        <div className='transition-all ease-in-out delay-50 bg-cover bg-center bg-home_bg w-5/6 hover:w-screen h-48  justify-center items-center rounded-2xl ' >
-            <h1 className=" text-black font-opensans text-6xl tracking-tight px-10 pt-12">
+      {/* FreshPaper */}
+        <div className={`transition-all ease-in-out delay-50 bg-cover bg-center bg-home_bg w-5/6 hover:w-screen h-48  justify-center items-center rounded-2xl`} >
+            <h1 className="text-black font-opensans text-6xl tracking-tight px-10 pt-12">
                 FreshPaper
             </h1>
             <span className='font-normal pt-2'>An auto wallpaper changer app</span>

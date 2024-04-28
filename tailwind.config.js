@@ -20,7 +20,7 @@ export default {
     // },
     extend: {
       backgroundImage: {
-        'home_bg': "url('src/assets/home_bg.jpg')",
+        'home_bg': "url('/home_bg.webp')",
         
       }
     },
