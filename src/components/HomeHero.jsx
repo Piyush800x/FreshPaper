@@ -7,6 +7,9 @@ const HomeHero = () => {
     const [staticURL, setStaticUrl] = useState('')
 
   useEffect(() => {
+    const lastGeneratedTime = localStorage.getItem('lastGeneratedTime');
+
+
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
       if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -19,14 +22,24 @@ const HomeHero = () => {
         }
       }
     };
-    if (localStorage.getItem('img_url') == null || localStorage.getItem('img_url') == undefined)  {
-      xhr.open('GET', 'https://source.unsplash.com/random/1920x1080', true);
-      xhr.send();
-    }
-    else {
-      setStaticUrl(localStorage.getItem('img_url'));
-    }
 
+    if (!lastGeneratedTime || 
+      (lastGeneratedTime && Date.now() - parseInt(lastGeneratedTime) >= 24 * 60 * 60 * 1000) )  {
+        if (localStorage.getItem('img_url') == null || localStorage.getItem('img_url') == undefined)  {
+          xhr.open('GET', 'https://source.unsplash.com/random/1920x1080', true);
+          xhr.send();
+          localStorage.setItem('lastGeneratedTime', Date.now());
+        }
+        else {
+          setStaticUrl(localStorage.getItem('img_url'));
+        }
+      }
+      else  {
+        console.log(`lastTime: ${lastGeneratedTime }`)
+        console.log(`calc: ${Date.now() - parseInt(lastGeneratedTime) >= 24 * 60 * 60 * 1000}`)
+        setStaticUrl(localStorage.getItem('img_url'));
+      }
+    
     const timeout = setTimeout(() => {
       setIsVisible(true);
     }, 100); // Adjust the delay as needed
@@ -47,7 +60,7 @@ const HomeHero = () => {
       };
     
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flex flex-col justify-center items-center font-opensans'>
       {/* FreshPaper */}
         <div className={`transition-all ease-in-out delay-50 bg-cover bg-center bg-home_bg w-5/6 hover:w-screen h-48  justify-center items-center rounded-2xl`} >
             <h1 className="text-black font-opensans text-6xl tracking-tight px-10 pt-12">
