@@ -16,6 +16,7 @@ function SearchBar({theme}) {
   const handleSearch = async () => {
     console.log("UPDATE CALLED");
     history.push('/data', { searchTerm });
+    console.log(`SearchTerm: ${searchTerm}`)
   };
 
   const handleMouseEnter = () => {
@@ -24,6 +25,12 @@ function SearchBar({theme}) {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   return (
@@ -38,6 +45,7 @@ function SearchBar({theme}) {
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
+          onKeyDown={handleKeyPress}
           className={`px-3 py-2 border border-gray-300 rounded-xl transition-all duration-300 ease-in-out ${
             isHovered ? 'w-56' : 'w-20'
           }`}

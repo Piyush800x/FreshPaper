@@ -5,6 +5,7 @@ const HomeHero = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isDownloaded, setIsDownloaded] = useState(false);
     const [staticURL, setStaticUrl] = useState('')
+    const [isApplied, setIsApplied] = useState(false);
 
   useEffect(() => {
     const lastGeneratedTime = localStorage.getItem('lastGeneratedTime');
@@ -58,7 +59,18 @@ const HomeHero = () => {
             console.log("Download Failed")
         }
       };
-    
+
+      const handleSetWallpaper = async (src) => {
+        let res = await invoke('set_wallpaper', {url: src});
+        if (res == true)  {
+          console.log("Wallpaper set")
+          setIsApplied(true)
+        }
+        else  {
+          console.log("Wallpaper not set")
+        }
+      };
+
   return (
     <div className='flex flex-col justify-center items-center font-opensans'>
       {/* FreshPaper */}
@@ -87,9 +99,14 @@ const HomeHero = () => {
                             }`}
                             style={{ opacity: isVisible ? 1 : 0}}
                         />
-                        <button onClick={() => downloadImage(staticURL)} 
-                        className="text-lg font-medium transition ease-in-out delay-50 bg-purple-500 hover:bg-purple-700 hover:drop-shadow-lg hover:shadow-purple-500/50 hover:-translate-y-1 hover:scale-110 text-white py-2 px-4 rounded-xl w-36 h-12">Download
-                        </button>
+                        <div className='flex flex-row'>
+                          <button onClick={() => downloadImage(staticURL)} 
+                          className="text-lg font-medium transition ease-in-out delay-50 bg-purple-500 hover:bg-purple-700 hover:drop-shadow-lg hover:shadow-purple-500/50 hover:-translate-y-1 hover:scale-110 text-white py-2 px-4 rounded-xl w-36 h-12 m-2">Download
+                          </button>
+                          <button onClick={() => handleSetWallpaper(staticURL)} 
+                          className="text-lg font-medium transition ease-in-out delay-50 bg-purple-500 hover:bg-purple-700 hover:drop-shadow-lg hover:shadow-purple-500/50 hover:-translate-y-1 hover:scale-110 text-white py-2 px-4 rounded-xl w-36 h-12 m-2">Apply
+                          </button>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -101,6 +118,19 @@ const HomeHero = () => {
                         <button
                           onClick={() => setIsDownloaded(false)}
                           className="transition ease-in-out delay-50 bg-purple-500 hover:bg-purple-700 hover:-translate-y-1 hover:scale-110 text-white font-bold py-2 px-4 rounded justify-center items-center"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                )}
+              {isApplied && (
+                    <div className="fixed inset-0 flex items-center justify-center z-50">
+                      <div className="flex flex-col bg-purple-50 rounded-2xl shadow-lg p-6 justify-center items-center">
+                        <p className="text-lg font-bold mb-4 mx-10">Wallpaper Set!</p>
+                        <button
+                          onClick={() => setIsApplied(false)}
+                          className="text-lg transition ease-in-out delay-50 bg-blue-500 hover:bg-blue-700 hover:drop-shadow-lg hover:shadow-blue-500/50 hover:-translate-y-1 hover:scale-110 text-white font-light py-2 px-4 rounded-3xl justify-center items-center w-24 h-12"
                         >
                           Close
                         </button>

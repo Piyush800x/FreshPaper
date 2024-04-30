@@ -4,8 +4,17 @@ import app_bg from '../assets/app_bg.webp';
 import ImageCard from '../components/ImageCard.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import HomeHero from '../components/HomeHero.jsx'
+import {invoke} from '@tauri-apps/api/tauri';
+
 
 const HomePage = () => {
+
+  const getDisplays = async () => {
+    let data = await invoke('get_display_info');
+    console.log(`monitor: ${data}`)
+  }
+
+  getDisplays()
   return (
     <div className='block bg-pink-50 w-full' >
       {/* <div className='z-10'>

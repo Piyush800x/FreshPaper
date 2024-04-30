@@ -19,6 +19,7 @@ use winit::event_loop::EventLoop;
 use display_info::DisplayInfo;
 use std::time::Instant;
 use serde_json::json;
+use wallpaper;
 
 #[derive(Debug, Deserialize)]
 pub struct UnsplashPhoto {
@@ -119,6 +120,57 @@ pub async fn download_image(url: String) -> bool   {
     }
 }
 
+pub async fn save_to_doc(url: String) -> Option<PathBuf>   {
+    // Send a GET request to the URL
+    let response = reqwest::get(url.to_string()).await.unwrap();
+    print!("Response -> {:?}", response);
+
+    // Check if the request was successful
+    return if response.status().is_success() {
+        // Extract the image data
+        let image_data = response.bytes().await.unwrap();
+
+        // Determine the downloads folder based on the operating system
+        let mut downloads_folder = match env::var_os("HOME") {
+            Some(home_dir) => {
+                let mut path = PathBuf::from(home_dir);
+                path.push("Downloads");
+                path.push("FreshPaper"); // Create the "FreshPaper" folder
+                path
+            }
+            None => {
+                // Default to the current directory if HOME environment variable is not set
+                PathBuf::from("./FreshPaper") // Create the "FreshPaper" folder in the current directory
+            }
+        };
+
+        // Create the "FreshPaper" folder if it doesn't exist
+        std::fs::create_dir_all(&downloads_folder)
+            .expect("Failed to create the FreshPaper folder");
+
+        println!("{:?}", downloads_folder);
+
+        // Create a new file to save the image
+        let random_number = rand::thread_rng().gen_range(1000..999999);
+        let file_name = format!("{}.jpg", random_number);
+
+        // Append the filename to the downloads folder path
+        let mut file_path = downloads_folder.clone();
+        file_path.push(&file_name);
+
+        let mut file = File::create(&file_path).unwrap();
+
+        // Write the image data to the file
+        copy(&mut image_data.as_ref(), &mut file).unwrap();
+
+        println!("Image downloaded successfully!");
+        Some(file_path)
+    } else {
+        println!("Failed to download image: {}", response.status());
+        None
+    }
+}
+
 pub fn get_display_infos() -> Vec<String> {
     let mut display_info: Vec<String> = vec![];
     let display_infos = DisplayInfo::all().unwrap();
@@ -137,4 +189,13 @@ pub fn get_display_infos() -> Vec<String> {
     }
 
     return display_info;
+}
+
+
+pub async fn download_set_wallpaper(url: String) -> Result<bool, bool> {
+    let file_path = save_to_doc(url).await.unwrap();
+    match wallpaper::set_from_path(file_path.to_str().unwrap()) {
+        Ok(_) => Ok(true),
+        Err(_e) => Err(false),
+    }
 }
