@@ -3,16 +3,22 @@
 use dotenv;
 use rand::prelude::*;
 use reqwest;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize, Serializer};
 use std;
 use std::fs::File;
 use std::io::{copy, Read};
 use std::string::String;
 use tokio;
 use rand::Rng;
-use std::path::PathBuf;
+use std::path::{Display, PathBuf};
 use std::env;
-
+use serde::ser::SerializeStruct;
+use tauri::{command, State, Manager};
+use winit::window::Window;
+use winit::event_loop::EventLoop;
+use display_info::DisplayInfo;
+use std::time::Instant;
+use serde_json::json;
 
 #[derive(Debug, Deserialize)]
 pub struct UnsplashPhoto {
@@ -29,15 +35,6 @@ pub struct UnsplashSearchResult {
     pub results: Vec<UnsplashPhoto>,
 }
 
-// pub async fn download(img_url: String) {
-//     let mut rng = rand::thread_rng();
-//     let img_response = reqwest::get(&img_url).await.unwrap();
-//     let img_bytes = img_response.bytes().await.unwrap();
-//
-//     // Write image
-//     std::fs::write(format!("{}.jpg", rng.gen_range(0..=9999)), img_bytes).unwrap();
-//     print!("Download success!");
-// }
 
 pub async fn search(access_key: String, query: String, page: i32) -> UnsplashSearchResult {
     let query = query;
@@ -120,4 +117,24 @@ pub async fn download_image(url: String) -> bool   {
         println!("Failed to download image: {}", response.status());
         false
     }
+}
+
+pub fn get_display_infos() -> Vec<String> {
+    let mut display_info: Vec<String> = vec![];
+    let display_infos = DisplayInfo::all().unwrap();
+
+    for (i, &ref display) in display_infos.iter().enumerate()    {
+
+        let json_data = json!({
+            "index": i,
+            "name": String::from(format!("Display {}", i)),
+            "res": (display.width, display.height),
+            "primary": display.is_primary
+        });
+
+        display_info.insert(i, json_data.to_string());
+
+    }
+
+    return display_info;
 }
