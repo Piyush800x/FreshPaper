@@ -25,11 +25,11 @@ const HomeHero = () => {
     };
 
     if (!lastGeneratedTime || 
-      (lastGeneratedTime && Date.now() - parseInt(lastGeneratedTime) >= 24 * 60 * 60 * 1000) )  {
+      (lastGeneratedTime &&  (parseInt(lastGeneratedTime) - Date.now()) >= Date.now()) )  {
         if (localStorage.getItem('img_url') == null || localStorage.getItem('img_url') == undefined)  {
           xhr.open('GET', 'https://source.unsplash.com/random/1920x1080', true);
           xhr.send();
-          localStorage.setItem('lastGeneratedTime', Date.now());
+          localStorage.setItem('lastGeneratedTime', Date.now() + 86400000);
         }
         else {
           setStaticUrl(localStorage.getItem('img_url'));
