@@ -20,6 +20,7 @@ use display_info::DisplayInfo;
 use std::time::Instant;
 use serde_json::json;
 use wallpaper;
+use std::io::prelude::*;
 
 #[derive(Debug, Deserialize)]
 pub struct UnsplashPhoto {
@@ -131,17 +132,15 @@ pub async fn save_to_doc(url: String) -> Option<PathBuf>   {
         let image_data = response.bytes().await.unwrap();
 
         // Determine the downloads folder based on the operating system
-        let mut downloads_folder = match env::var_os("HOME") {
-            Some(home_dir) => {
-                let mut path = PathBuf::from(home_dir);
-                path.push("Downloads");
-                path.push("FreshPaper"); // Create the "FreshPaper" folder
-                path
-            }
-            None => {
-                // Default to the current directory if HOME environment variable is not set
-                PathBuf::from("./FreshPaper") // Create the "FreshPaper" folder in the current directory
-            }
+        let mut downloads_folder = if cfg!(target_os = "macos") {
+            let home_dir = env::var("HOME").expect("Failed to get HOME environment variable");
+            PathBuf::from(&home_dir).join("Downloads").join("FreshPaper")
+            } else if cfg!(target_os = "windows") {
+                let profile_dir = env::var("USERPROFILE").expect("Failed to get USERPROFILE environment variable");
+                PathBuf::from(profile_dir).join("Downloads").join("FreshPaper")
+            } else {
+                let home_dir = env::var("HOME").expect("Failed to get HOME environment variable");
+                PathBuf::from(&home_dir).join("Downloads").join("FreshPaper")
         };
 
         // Create the "FreshPaper" folder if it doesn't exist
