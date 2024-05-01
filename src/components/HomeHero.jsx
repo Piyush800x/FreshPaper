@@ -113,13 +113,14 @@ const HomeHero = () => {
             </div>
             {isDownloaded && (
                     <div className="fixed inset-0 flex items-center justify-center z-50">
-                      <div className=" bg-white rounded-lg shadow-lg p-6 justify-center items-center">
+                      <div className=" bg-white rounded-xl shadow-lg p-6 justify-center items-center">
                         <p className="text-lg font-bold mb-4">Download Complete!</p>
+                        <p className="text-md font-normal mb-4">Saved to Downloads</p>
                         <button
                           onClick={() => setIsDownloaded(false)}
-                          className="transition ease-in-out delay-50 bg-purple-500 hover:bg-purple-700 hover:-translate-y-1 hover:scale-110 text-white font-bold py-2 px-4 rounded justify-center items-center"
+                          className="transition ease-in-out delay-50 bg-purple-500 hover:bg-purple-700 hover:-translate-y-1 hover:scale-110 text-white font-bold py-2 px-4 rounded-xl justify-center items-center"
                         >
-                          Close
+                          Ok
                         </button>
                       </div>
                     </div>
@@ -132,7 +133,7 @@ const HomeHero = () => {
                           onClick={() => setIsApplied(false)}
                           className="text-lg transition ease-in-out delay-50 bg-blue-500 hover:bg-blue-700 hover:drop-shadow-lg hover:shadow-blue-500/50 hover:-translate-y-1 hover:scale-110 text-white font-light py-2 px-4 rounded-3xl justify-center items-center w-24 h-12"
                         >
-                          Close
+                          Ok
                         </button>
                       </div>
                     </div>

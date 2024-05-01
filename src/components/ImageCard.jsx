@@ -63,11 +63,12 @@ const ImageCard = ({ src }) => {
                     <div className="fixed inset-0 flex items-center justify-center z-50">
                       <div className="flex flex-col bg-purple-50 rounded-2xl shadow-lg p-6 justify-center items-center">
                         <p className="text-lg font-bold mb-4">Download Complete!</p>
+                        <p className="text-md font-normal mb-4">Saved to Downloads</p>
                         <button
                           onClick={() => setIsDownloaded(false)}
                           className="text-lg transition ease-in-out delay-50 bg-blue-500 hover:bg-blue-700 hover:drop-shadow-lg hover:shadow-blue-500/50 hover:-translate-y-1 hover:scale-110 text-white font-light py-2 px-4 rounded-3xl justify-center items-center w-24 h-12"
                         >
-                          Close
+                          OK
                         </button>
                       </div>
                     </div>
@@ -80,7 +81,7 @@ const ImageCard = ({ src }) => {
                           onClick={() => setIsApplied(false)}
                           className="text-lg transition ease-in-out delay-50 bg-blue-500 hover:bg-blue-700 hover:drop-shadow-lg hover:shadow-blue-500/50 hover:-translate-y-1 hover:scale-110 text-white font-light py-2 px-4 rounded-3xl justify-center items-center w-24 h-12"
                         >
-                          Close
+                          OK
                         </button>
                       </div>
                     </div>
