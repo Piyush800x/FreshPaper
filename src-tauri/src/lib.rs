@@ -54,7 +54,7 @@ pub async fn search(access_key: String, query: String, page: i32) -> UnsplashSea
 pub async fn get_from_search(name: String, page: i32) -> Vec<String>  {    // call this func in main and add it to invoke_handler
     // dotenv::dotenv().ok();
     // let access_key = env::var("UNSPLASH_ACCESS_KEY").expect("Error");
-    let access_key: String = "CtY3hbATQPqbDFhjW2r_EX20Mp_7djghn25tqea0Qag".to_string();
+    let access_key: String = "<UNSPLASH_ACCESS_KEY>".to_string();
     let search_query = search(access_key, name, page).await;
     let mut urls: Vec<String> = vec![];
 
