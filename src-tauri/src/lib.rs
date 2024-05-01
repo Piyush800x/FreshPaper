@@ -1,26 +1,17 @@
 // mod gui;
 
-use dotenv;
-use rand::prelude::*;
 use reqwest;
-use serde::{Deserialize, Serialize, Serializer};
+use serde::{Deserialize};
 use std;
 use std::fs::File;
-use std::io::{copy, Read};
+use std::io::{copy};
 use std::string::String;
-use tokio;
 use rand::Rng;
-use std::path::{Display, PathBuf};
+use std::path::{PathBuf};
 use std::env;
-use serde::ser::SerializeStruct;
-use tauri::{command, State, Manager};
-use winit::window::Window;
-use winit::event_loop::EventLoop;
 use display_info::DisplayInfo;
-use std::time::Instant;
 use serde_json::json;
 use wallpaper;
-use std::io::prelude::*;
 
 #[derive(Debug, Deserialize)]
 pub struct UnsplashPhoto {
@@ -132,7 +123,7 @@ pub async fn save_to_doc(url: String) -> Option<PathBuf>   {
         let image_data = response.bytes().await.unwrap();
 
         // Determine the downloads folder based on the operating system
-        let mut downloads_folder = if cfg!(target_os = "macos") {
+        let downloads_folder = if cfg!(target_os = "macos") {
             let home_dir = env::var("HOME").expect("Failed to get HOME environment variable");
             PathBuf::from(&home_dir).join("Downloads").join("FreshPaper")
             } else if cfg!(target_os = "windows") {

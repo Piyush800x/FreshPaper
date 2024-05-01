@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '../assets/search.svg';
-import {invoke} from '@tauri-apps/api/tauri';
 import { useHistory } from 'react-router-dom';
 
 function SearchBar({theme}) {
   const [searchTerm, setSearchTerm] = useState('');
   const [isHovered, setIsHovered] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
   const handleSearchChange = (event) => {
@@ -35,7 +33,7 @@ function SearchBar({theme}) {
 
   return (
     <div
-      className="flex items-center relative font-opensans"
+      className="flex flex-row items-center  font-opensans"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -47,7 +45,7 @@ function SearchBar({theme}) {
           onChange={handleSearchChange}
           onKeyDown={handleKeyPress}
           className={`px-3 py-2 border border-gray-300 rounded-xl transition-all duration-300 ease-in-out ${
-            isHovered ? 'w-56' : 'w-20'
+            isHovered ? 'w-56' : 'w-56'
           }`}
         />
       </div>

@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import SetSidebar from '../components/SetSidebar.jsx';
-import app_bg from '../assets/app_bg.webp';
-import ImageCard from '../components/ImageCard.jsx';
+import React from 'react'
 import SearchBar from '../components/SearchBar.jsx';
 import HomeHero from '../components/HomeHero.jsx'
 import {invoke} from '@tauri-apps/api/tauri';

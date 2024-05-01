@@ -2,8 +2,6 @@ import React from 'react'
 import SetSidebar from '../components/SetSidebar.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import SearchItemsList from '../components/SearchItemsList.jsx';
-import { CogOutline } from 'react-ionicons'
-import app_bg from '../assets/app_bg.webp';
 
 const SearchPage = () => {
   return (

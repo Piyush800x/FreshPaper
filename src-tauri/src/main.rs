@@ -2,11 +2,9 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::env;
-use display_info::DisplayInfo;
-use wallpaper_app_latest::{search, get_from_search, download_image, get_display_infos, download_set_wallpaper};
+use wallpaper_app_latest::{get_from_search, download_image, get_display_infos, download_set_wallpaper};
 use tokio;
-use tauri::{Manager, RunEvent, command, generate_handler};
-use dotenv;
+use tauri::{command, generate_handler};
 
 #[tokio::main]
 async fn main() {
@@ -21,7 +19,7 @@ async fn main() {
 
 #[command]
 async fn searching(name: String, page: i32) -> Vec<String> {
-    let mut list = get_from_search(name, page).await;
+    let list = get_from_search(name, page).await;
     return list;
 }
 // Result<Ok(bool), Err()>
